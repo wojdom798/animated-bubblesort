@@ -34,11 +34,12 @@ function randomInt(min, max) {
 // each point: (x, y), where the value 'y' is stored at index 'x'
 function swapPoints(a, b) {
   let tmp = a.style.top;
-  b.style.top = a.style.top;
-  a.style.top = tmp;
+  a.style.top = b.style.top;
+  b.style.top = tmp;
 }
 
 function bubbleSort() {
+  console.log(mappedPoints);
   for (let i = 0; i < mappedPoints.length; i++) {
     for (let j = i + 1; j < mappedPoints.length; j++) {
       if ((typeof mappedPoints[i] !== "undefined") && (typeof mappedPoints[j] !== "undefined")) {
@@ -47,24 +48,28 @@ function bubbleSort() {
         let y1 = mappedPoints[i].offsetTop;
         let x2 = mappedPoints[j].offsetLeft;
         let y2 = mappedPoints[j].offsetTop;
-        // console.log(`comparing: (${x1}, ${y1}) and (${x1}, ${y1})`);
-        if (mappedPoints[i].offsetTop > mappedPoints[j].offsetTop) {
+        // console.log(`comparing: (${x1}, ${y1}) and (${x2}, ${y2})`);
+        if (mappedPoints[i].offsetTop < mappedPoints[j].offsetTop) {
           // console.log(`swapping: ${mappedPoints[i]} and ${mappedPoints[j]}`);
-          setTimeout(() => {
+          mappedPoints[i].style.backgroundColor = "red";
+          mappedPoints[j].style.backgroundColor = "orange";
+          // setTimeout(() => {
             swapPoints(mappedPoints[i], mappedPoints[j]);
-          }, 500 + 10 * j);
-          let el = mappedPoints[i];
-          mappedPoints[i] = mappedPoints[j];
-          mappedPoints[j] = el;
+            mappedPoints[j].style.backgroundColor = "green";
+          // }, 500 + 10 * j);
+          
+        } else {
+          mappedPoints[i].style.backgroundColor = "blue";
         }
       }
     }
   }
+  console.log("bubble sort done.");
 }
 
 
 
-generateRandom(1000, 4);
+generateRandom(500, 4);
 
 setTimeout(() => {
   bubbleSort();
