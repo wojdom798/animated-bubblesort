@@ -35,7 +35,7 @@ function generateRandom(n, r) {
 
 function generateRandom(n, r) {
   mappedPoints = new Array(window.innerWidth - r*2);
-  console.log(mappedPoints.length);
+  // console.log(mappedPoints.length);
 
   if (n > mappedPoints.length) {
     for (let i = 0; i < mappedPoints.length; i++) {
@@ -84,33 +84,32 @@ function bubbleSort() {
   for (let i = 0; i < mappedPoints.length; i++) {
     for (let j = i + 1; j < mappedPoints.length; j++) {
       if ((typeof mappedPoints[i] !== "undefined") && (typeof mappedPoints[j] !== "undefined")) {
-        // console.log("both are defined");
-        let x1 = mappedPoints[i].offsetLeft;
-        let y1 = mappedPoints[i].offsetTop;
-        let x2 = mappedPoints[j].offsetLeft;
-        let y2 = mappedPoints[j].offsetTop;
-        // console.log(`comparing: (${x1}, ${y1}) and (${x2}, ${y2})`);
         setTimeout(() => {
           if (mappedPoints[i].offsetTop < mappedPoints[j].offsetTop) {
-            // console.log(`swapping: ${mappedPoints[i]} and ${mappedPoints[j]}`);
-            // setTimeout(() => {
-              swapPoints(mappedPoints[i], mappedPoints[j]);
-            // }, 100 + 10*j);
-            
+            // delay(15);
+            swapPoints(mappedPoints[i], mappedPoints[j]);
           } else {
             mappedPoints[i].style.backgroundColor = "blue";
           }
-        }, 2 + Math.floor(0.05 * i));
-        
+        }, 2 + j * 2);
       }
     }
   }
-  console.log("bubble sort done.");
+  // console.log("bubble sort done.");
 }
 
+function delay(ms) {
+  let start = Date.now();
+  let difference = 0;
+  while (difference < ms) {
+    difference = Date.now() - start;
+    console.log("difference = " + difference);
+  }
+};
 
 
-generateRandom(400, 3);
+
+generateRandom(500, 3);
 
 setTimeout(() => {
   bubbleSort();
